@@ -1,0 +1,1 @@
+export { isMobileTerminal } from "./flexible";
