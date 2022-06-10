@@ -17,5 +17,15 @@ export default defineConfig({
       // 绝对路径
       "@": resolve(__dirname, "src")
     }
+  },
+  server: {
+    proxy: {
+      "/api": {
+        target: "https://api.imooc-front.lgdsunday.club/api",
+        // 跨域
+        changeOrigin: true,
+        rewrite: path => path.replace(/^\/api/, "")
+      }
+    }
   }
 });

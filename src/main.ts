@@ -1,4 +1,7 @@
 import { createApp } from "vue";
 import App from "./App.vue";
+import router from "./router";
 import "./styles/index.scss";
-createApp(App).mount("#app");
+import { createPinia } from "pinia";
+import { vuexStore } from "@/store";
+createApp(App).use(router).use(vuexStore).use(createPinia()).mount("#app");
