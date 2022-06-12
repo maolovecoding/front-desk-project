@@ -24,7 +24,7 @@
     </ul>
     <!-- 弹出层 -->
     <Popup :model-value="false" v-model="isVisible">
-      <div>你好</div>
+      <Menu :categories="categories" @on-item-click="handleItemClick" />
     </Popup>
   </div>
 </template>
@@ -33,6 +33,7 @@
 import { onBeforeUpdate, ref, watch, defineProps } from "vue";
 import { useScroll } from "@vueuse/core";
 import { SvgIcon, Popup } from "@/libs";
+import Menu from "../../menu/index.vue";
 import { ICategory } from "../type";
 const props = defineProps<{
   categories: ICategory[];
@@ -45,7 +46,7 @@ const sliderStyle = ref({
   width: "52px"
 });
 // 获取ul
-const ulRef = ref();
+const ulRef = ref<HTMLUListElement>();
 // 选中的item项的下标
 const currCategoryIndex = ref(0);
 // 获取所有的 item 元素
@@ -71,11 +72,17 @@ onBeforeUpdate(() => {
 // 在选中的 item发生改变时 更新当前的滑块样式
 watch(currCategoryIndex, newIndex => {
   const { left, width } = itemRefs[newIndex].getBoundingClientRect();
+  console.log(left, ulRef.value?.scrollLeft);
   sliderStyle.value = {
     // 滑块横向移动的距离 =  ul混动的位置 + 当前元素的left - ul的padding
     transform: `translateX(${ulScrollLeft.value + left - 10}px)`,
     // 滑块的宽度
     width: `${width}px`
   };
+  // 滑块滚动条的位置再外面点击弹出层上的item项时 混动条跟着滑动
+  if (isVisible.value) {
+    isVisible.value = false;
+    ulRef.value!.scrollLeft += left - 10;
+  }
 });
 </script>
