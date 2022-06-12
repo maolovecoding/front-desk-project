@@ -8,6 +8,7 @@
         :style="sliderStyle"
         class="absolute h-[22px] bg-zinc-900 rounded-lg duration-200"></li>
       <li
+        @click="handlePopupShow"
         class="fixed top-0 right-[-1px] h-4 px-1 flex items-center bg-white z-20 shadow-l-white">
         <SvgIcon class="w-1.5 h-1.5" name="hamburger" />
       </li>
@@ -21,13 +22,17 @@
         {{ category.name }}
       </li>
     </ul>
+    <!-- 弹出层 -->
+    <Popup :model-value="false" v-model="isVisible">
+      <div>你好</div>
+    </Popup>
   </div>
 </template>
 
 <script setup lang="ts">
 import { onBeforeUpdate, ref, watch, defineProps } from "vue";
 import { useScroll } from "@vueuse/core";
-import { SvgIcon } from "@/libs";
+import { SvgIcon, Popup } from "@/libs";
 import { ICategory } from "../type";
 const props = defineProps<{
   categories: ICategory[];
@@ -52,6 +57,11 @@ const setItemRefs = (el: any) => {
 const { x: ulScrollLeft } = useScroll(ulRef);
 const handleItemClick = (index: number) => {
   currCategoryIndex.value = index;
+};
+// 控制popup蒙版的显示和隐藏
+const isVisible = ref(false);
+const handlePopupShow = () => {
+  isVisible.value = true;
 };
 // 数据发生改变 DOM更新之前执行该回调
 onBeforeUpdate(() => {
