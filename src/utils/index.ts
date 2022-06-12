@@ -1,4 +1,4 @@
-export { isMobileTerminal } from "./flexible";
+export * from "./flexible";
 import Request from './request'
 export {
   Request

@@ -21,3 +21,22 @@ export const isMobileTerminal2 = computed(() => {
     navigator.userAgent
   );
 });
+
+// 最大值
+const MAX_FONT_SIZE = 40;
+/**
+ * 动态指定 rem 基准值 最大 40px
+ * 根据用户的屏幕宽度 进行计算 把计算的值给根标签 html
+ * 作为font-size的基准值
+ */
+export const useREM = () => {
+  // 监听 html解析完成事件
+  document.addEventListener("DOMContentLoaded", () => {
+    // 拿到 html 标签
+    // 计算fonts-size 根据屏幕宽度 / 10 = 字体大小
+    let fontSize = window.innerWidth / 10;
+    fontSize = fontSize > MAX_FONT_SIZE ? MAX_FONT_SIZE : fontSize;
+    // 设置字体大小
+    document.querySelector("html")!.style.fontSize = fontSize + "px";
+  });
+};

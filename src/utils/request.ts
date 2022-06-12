@@ -109,8 +109,11 @@ class Request {
     );
     this.instance.interceptors.response.use(
       res => {
-        // 返回真实数据 不是包装的数据
-        return res.data;
+        // 这里的res已经是真实数据 但是有用的数据在该对象的data里面
+        const { success, data, message } = res as any as IResponse<any>;
+        if (success) return data;
+        // 业务请求错误
+        return Promise.reject(new Error(message));
       },
       error => error
     );
@@ -118,3 +121,10 @@ class Request {
 }
 
 export default Request;
+
+interface IResponse<T> {
+  code: number;
+  data: T;
+  message: "string";
+  success: boolean;
+}

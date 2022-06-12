@@ -9,6 +9,10 @@ const request = new Request({
       // 携带code
       config!.headers!.icode = ICODE;
       return config;
+    },
+    responseInterceptor(res) {
+      // 这里的res是请求成功后 axios包装过一层的数据
+      return res.data;
     }
   }
 });
