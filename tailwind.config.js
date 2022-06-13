@@ -13,6 +13,16 @@ module.exports = {
       // 配置阴影
       boxShadow: {
         "l-white": "-10px 0 10px white"
+      },
+      // 配置高度
+      height: {
+        header: "72px", // 头部高度直接固定
+        main: "calc(100vh - 72px)" // 主体的高度 就是去掉头部header的高度
+      },
+      // bg-main 主色调
+      colors: {
+        main: "#f44c58",
+        "hover-main": "#f32836"
       }
     }
   },
