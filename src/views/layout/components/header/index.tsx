@@ -1,7 +1,7 @@
 import { FunctionalComponent } from "vue";
 import { useRouter } from "vue-router";
 import HeaderMy from "./headerMy";
-import HeaderSearch from "./headerSearch";
+import HeaderSearch from "./headerSearch.vue";
 import HeaderTheme from "./headerTheme";
 import Logo from "@/assets/logo.png";
 const Header: FunctionalComponent = () => {

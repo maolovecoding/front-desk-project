@@ -38,12 +38,12 @@ const Button: FunctionalComponent<IButtonProps> = (
     size = SizeEnum.default,
     isActiveAnim = true,
     isLoading = false,
-    click
+    click,
+    ...rest
   },
   { slots }
 ) => {
   const handleClick = (e: MouseEvent) => {
-    console.log(e);
     if (isLoading) return;
     click?.(e as PointerEvent);
   };

@@ -1,8 +1,23 @@
 import { FunctionalComponent, Transition } from "vue";
+import { useVModel } from "@vueuse/core";
 import SvgIcon from "../../svg-icon";
 import Button, { SizeEnum } from "../../button";
 import "./index.scss";
-const Search: FunctionalComponent = (props, { slots }) => {
+/**
+ * 1. 实现输入内容实现双向数据绑定
+ * 2. 搜索按钮在hover时 展示
+ * 3. 一键清空文本
+ * 4. 触发搜索
+ * 5. 控制搜索内容区域的显示
+ * 6. 事件处理
+ * @param props
+ * @param param1
+ * @returns
+ */
+const Search: FunctionalComponent<{
+  modelValue: string;
+  "update:modelValue": (val: string) => void;
+}> = ({ modelValue }, { slots }) => {
   return (
     <div class="group relative p-0.5 rounded-xl border-white duration-500 hover:bg-red-100/40">
       <div>
@@ -14,6 +29,7 @@ const Search: FunctionalComponent = (props, { slots }) => {
         />
         {/* 输入框 */}
         <input
+          v-model={modelValue}
           placeholder="搜索"
           type="text"
           class={`
