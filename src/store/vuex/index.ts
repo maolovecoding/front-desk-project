@@ -1,11 +1,14 @@
+import { IRoot } from './type';
 import { createStore } from "vuex";
-
-const store = createStore({
-  state: {},
-  getters: {},
+import getters from './getter'
+import category from './modules/category'
+const store = createStore<IRoot>({
+  getters,
   mutations: {},
   actions: {},
-  modules: {}
+  modules: {
+    category
+  }
 });
 
 export default store;

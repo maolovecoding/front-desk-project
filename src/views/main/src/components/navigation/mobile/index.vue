@@ -13,7 +13,7 @@
         <SvgIcon class="w-1.5 h-1.5" name="hamburger" />
       </li>
       <li
-        v-for="(category, index) in categories"
+        v-for="(category, index) in store.categories"
         @click="handleItemClick(index)"
         :ref="setItemRefs"
         class="shrink-0 px-1.5 py-0.5 z-10 duration-200 last:mr-4"
@@ -24,7 +24,7 @@
     </ul>
     <!-- 弹出层 -->
     <Popup :model-value="false" v-model="isVisible">
-      <Menu :categories="categories" @on-item-click="handleItemClick" />
+      <Menu @on-item-click="handleItemClick" />
     </Popup>
   </div>
 </template>
@@ -32,12 +32,14 @@
 <script setup lang="ts">
 import { onBeforeUpdate, ref, watch, defineProps } from "vue";
 import { useScroll } from "@vueuse/core";
+import { categoryStore } from "@/store/pinia";
 import { SvgIcon, Popup } from "@/libs";
 import Menu from "../../menu/index.vue";
 import { ICategory } from "../type";
-const props = defineProps<{
-  categories: ICategory[];
-}>();
+// const props = defineProps<{
+//   // categories: ICategory[];
+// }>();
+const store = categoryStore()
 // 滑块
 const sliderRef = ref();
 // 滑块默认样式

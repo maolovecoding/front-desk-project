@@ -4,7 +4,7 @@
     <ul class="overflow-y-scroll">
       <li
         class="text-lg text-zinc-900 px-1 py-1.5 duration-100 active:bg-zinc-100"
-        v-for="(category, index) in categories"
+        v-for="(category, index) in store.categories"
         :key="category.id"
         @click="$emit('onItemClick', index)">
         {{ category.name }}
@@ -15,10 +15,12 @@
 
 <script setup lang="ts">
 import { defineProps, defineEmits } from "vue";
+import { categoryStore } from "@/store/pinia";
 import { ICategory } from "../navigation/type";
-defineProps<{
-  categories: ICategory[];
-}>();
+// defineProps<{
+//   categories: ICategory[];
+// }>();
+const store = categoryStore();
 defineEmits<{
   (e: "onItemClick", index: number): void;
 }>();
