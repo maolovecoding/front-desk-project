@@ -9,7 +9,7 @@
 <script setup lang="ts">
 import Floating from "./components/floating";
 import Header from "./components/header";
-import Main from "./components/main";
+import Main from "./components/main/index.vue";
 </script>
 
 <style scoped></style>

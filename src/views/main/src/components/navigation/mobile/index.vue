@@ -30,15 +30,11 @@
 </template>
 
 <script setup lang="ts">
-import { onBeforeUpdate, ref, watch, defineProps } from "vue";
+import { onBeforeUpdate, ref, watch } from "vue";
 import { useScroll } from "@vueuse/core";
 import { categoryStore } from "@/store/pinia";
 import { SvgIcon, Popup } from "@/libs";
 import Menu from "../../menu/index.vue";
-import { ICategory } from "../type";
-// const props = defineProps<{
-//   // categories: ICategory[];
-// }>();
 const store = categoryStore()
 // 滑块
 const sliderRef = ref();
