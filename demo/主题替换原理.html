@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    /* 浅色主题 */
+    .light #app {
+      width: 100vw;
+      height: 100vh;
+      background-color: white;
+      color: #333;
+      transition: all 1s;
+    }
+
+    button {
+      position: absolute;
+      top: 100px;
+      right: 200px;
+    }
+
+    .dark #app {
+      width: 100vw;
+      height: 100vh;
+      background-color: #333;
+      color: white;
+      transition: all 1s;
+    }
+  </style>
+</head>
+
+<body class="light">
+  <div id="app">我是div</div>
+  <button onclick="change()">切换主题</button>
+  <script>
+    function change() {
+      document.body.classList.toggle("dark")
+    }
+  </script>
+</body>
+
+</html>

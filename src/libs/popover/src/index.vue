@@ -14,7 +14,7 @@
         ref="contentRef"
         v-show="isVisible"
         :style="contentStyle"
-        class="absolute p-1 z-20 bg-white border rounded-md">
+        class="absolute p-1 z-20 bg-white dark:bg-zinc-900 border dark:border-l-zinc-700 rounded-md">
         <!-- 匿名插槽 弹层视图中展示的内容 -->
         <slot />
       </div>

@@ -1,6 +1,7 @@
 import { defineStore, createPinia } from "pinia";
-import PiniaPluginPersist from 'pinia-plugin-persist'
+import PiniaPluginPersist from "pinia-plugin-persist";
 import categoryStore from "./category";
+import themeStore from "./theme";
 const store = defineStore("main", {
   state: () => ({}),
   getters: {},
@@ -12,4 +13,4 @@ pinia.use(PiniaPluginPersist);
 
 export default pinia;
 
-export { categoryStore };
+export { categoryStore, themeStore };

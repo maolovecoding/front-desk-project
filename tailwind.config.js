@@ -1,5 +1,7 @@
 module.exports = {
   content: ["index.html", "./src/**/*.{vue,tsx}"],
+  // 手动切换暗黑模式
+  darkMode: "class",
   theme: {
     extend: {
       // 配置默认的基准值
@@ -12,7 +14,8 @@ module.exports = {
       },
       // 配置阴影
       boxShadow: {
-        "l-white": "-10px 0 10px white"
+        "l-white": "-10px 0 10px white",
+        "l-zinc": "-10px 0 10px #18181b"
       },
       // 配置高度
       height: {

@@ -2,7 +2,7 @@
   <Popover class="flex items-center" :placement="POSITION.PROP_BOTTOM_LEFT">
     <template #reference>
       <div
-        class="relative flex items-center p-0.5 rounded-sm cursor-pointer duration-200 outline-none hover:bg-zinc-100">
+        class="relative flex items-center p-0.5 rounded-sm cursor-pointer duration-200 outline-none hover:bg-zinc-100 dark:hover:bg-zinc-900">
         <!-- 头像 -->
         <img
           class="w-3 h-3 rounded-sm"
@@ -12,7 +12,7 @@
         <SvgIcon
           class="h-1.5 w-1.5 ml-1.5"
           name="down-arrow"
-          fillClass="fill-zinc-900" />
+          fillClass="fill-zinc-900 fill-zinc-300" />
         <!-- vip -->
         <SvgIcon
           v-if="true"
@@ -25,12 +25,12 @@
       <div
         v-for="item in menuArr"
         :key="item.id"
-        class="flex items-center p-1 cursor-pointer rounded hover:bg-zinc-100/60">
+        class="flex items-center p-1 cursor-pointer rounded hover:bg-zinc-100/60 dark:bg-zinc-800">
         <SvgIcon
           :name="item.icon"
           class="w-1.5 h-1.5 ml-1 mr-1"
-          fillClass="fill-zinc-900" />
-        <span class="text-sm text-zinc-700">{{ item.title }}</span>
+          fillClass="fill-zinc-900 fill-zinc-300" />
+        <span class="text-sm text-zinc-700 dark:text-zinc-300">{{ item.title }}</span>
       </div>
     </div>
   </Popover>

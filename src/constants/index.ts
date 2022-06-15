@@ -18,3 +18,9 @@ export const ALL_CATEGORY_ITEM = {
   id: "all",
   name: "全部"
 };
+/**
+ * 默认主题样式
+ */
+export const DEFAULT_THEME = "theme-light";
+export const THEME_DARK = "theme-dark";
+export const THEME_SYSTEM = "theme-system";
