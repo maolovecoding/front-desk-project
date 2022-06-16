@@ -1,12 +1,19 @@
 <template>
   <div class="bg-white dark:bg-zinc-900 xl:dark:bg-zinc-800 rounded pb-1">
-    <div class="relative w-full rounded cursor-zoom-in group">
+    <div
+      class="relative w-full rounded cursor-zoom-in group"
+      :style="{
+        backgroundColor: randomColor()
+      }">
       <!-- 图片 -->
       <img
+        v-lazy
         class="w-full rounded bg-transparent"
         :src="item.photo"
         :style="{
-          height: width ? (width / item.photoWidth) * item.photoHeight+'px' : ''
+          height: width
+            ? (width / item.photoWidth) * item.photoHeight + 'px'
+            : ''
         }" />
       <!-- 遮罩 -->
       <div
@@ -40,15 +47,15 @@
           :size="SizeEnum['icon-default']"
           icon-class="fill-zinc-900 dark:fill-zinc-200" />
       </div>
-      <!-- 标题 -->
-      <p class="text-sm mt-1 font-bold text-zinc-900 dark:text-zinc-300 px-1">
-        {{ item.title }}
-      </p>
-      <!-- 作者 -->
-      <div class="flex items-center mt-1 px-1">
-        <img class="h-2 w-2 rounded-full" :src="item.avatar" alt="头像" />
-        <span class="text-sm text-zinc-500 ml-1">{{ item.author }}</span>
-      </div>
+    </div>
+    <!-- 标题 -->
+    <p class="text-sm mt-1 font-bold text-zinc-900 dark:text-zinc-300 px-1">
+      {{ item.title }}
+    </p>
+    <!-- 作者 -->
+    <div class="flex items-center mt-1 px-1">
+      <img v-lazy class="h-2 w-2 rounded-full" :src="item.avatar" alt="头像" />
+      <span class="text-sm text-zinc-500 ml-1">{{ item.author }}</span>
     </div>
   </div>
 </template>
@@ -57,6 +64,7 @@
 import { defineProps } from "vue";
 import { IPexelsList } from "@/api";
 import { Button as ButtonVue, TypeEnum, SizeEnum } from "@/libs";
+import { randomColor } from "@/utils";
 defineProps<{
   item: IPexelsList;
   width?: number;

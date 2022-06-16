@@ -59,7 +59,6 @@ const getPexelsListData = async () => {
   // 修改loading标识 当前请求完毕
   isLoading.value = false;
 };
-
 </script>
 
 <style scoped></style>
