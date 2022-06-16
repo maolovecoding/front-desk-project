@@ -78,7 +78,10 @@ const containerWidth = ref(0);
 // 容器左边距 用来计算item的left
 const containerLeft = ref(0);
 const useContainerWidth = () => {
-  const { paddingLeft, paddingRight } = getComputedStyle(containerRef.value!,null);
+  const { paddingLeft, paddingRight } = getComputedStyle(
+    containerRef.value!,
+    null
+  );
   // 容器左边距
   containerLeft.value = parseFloat(paddingLeft);
   // 容器的宽度
@@ -202,7 +205,32 @@ watch(
     immediate: true
   }
 );
-
+/**
+ * 屏幕尺寸发生改变后重新计算
+ */
+const reset = () => {
+  setTimeout(() => {
+    useColumnWidth();
+    // 重置所有定位数据
+    data.forEach(item => delete item._style);
+  }, 0);
+};
+/**
+ * 监听列数的改变
+ */
+watch(
+  () => column,
+  () => {
+    if (picturePreReading) {
+      // 重新计算列宽 先重置
+      columnWidth.value = 0;
+    } else {
+      // 不需要预加载 重新计算图片位置即可
+      // reset();
+    }
+    reset();
+  }
+);
 onUnmounted(() => {
   // 清除所有item项上的 _style
   data.forEach(item => delete item._style);

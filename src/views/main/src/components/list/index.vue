@@ -5,9 +5,9 @@
       :data="pexelsList"
       node-key="id"
       :column="isMobileTerminal ? 2 : 5"
-      :picture-pre-reading="true">
+      :picture-pre-reading="false">
       <template #default="{ item, width, index }">
-        <Item :item="item"></Item>
+        <Item :item="item" :width="width"></Item>
       </template>
     </WaterFall>
   </div>
