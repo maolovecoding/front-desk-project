@@ -1,9 +1,10 @@
 <template>
   <div>
     <WaterFall
+    class="px-1 w-full"
       :data="pexelsList"
       node-key="id"
-      :column="5"
+      :column="isMobileTerminal ? 2 : 5"
       :picture-pre-reading="true">
       <template #default="{ item, width, index }">
         <Item :item="item"></Item>
@@ -17,6 +18,7 @@ import { ref } from "vue";
 import { getPexelsList, IPexelsList } from "@/api";
 import Item from "./item.vue";
 import { WaterFall } from "@/libs";
+import { isMobileTerminal } from "@/utils";
 /**
  * 构建数据请求
  */

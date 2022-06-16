@@ -78,7 +78,7 @@ const containerWidth = ref(0);
 // 容器左边距 用来计算item的left
 const containerLeft = ref(0);
 const useContainerWidth = () => {
-  const { paddingLeft, paddingRight } = getComputedStyle(containerRef.value!);
+  const { paddingLeft, paddingRight } = getComputedStyle(containerRef.value!,null);
   // 容器左边距
   containerLeft.value = parseFloat(paddingLeft);
   // 容器的宽度
@@ -118,8 +118,7 @@ const waitImgComplete = () => {
   // 获取 所有的 img标签的图片
   const allImg = getAllImg(imgElements);
   // 等待图片加载完成
-  onImgComplete(allImg).then(res => {
-    console.log(res);
+  onImgComplete(allImg).then(() => {
     // 图片加载完成 可以获取高度
     itemElements.forEach(el => itemHeights.push(el.offsetHeight));
     // 渲染图片位置
@@ -178,7 +177,7 @@ const incrementingHeight = (index: number) => {
   // 最小高度所在列
   const minCol = getMinHeightColumn(columnHeightObj.value);
   // 递增 当前列高度 + 当前图片高度 + 行间距
-  columnHeightObj.value[minCol] += itemHeights[minCol] + rowSpacing;
+  columnHeightObj.value[minCol] += itemHeights[index] + rowSpacing;
 };
 
 /**
