@@ -19,15 +19,17 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from "vue";
-import { getPexelsList, IPexelsList } from "@/api";
+import { ref, watch } from "vue";
+import { getPexelsList, IPexelsList, IParams } from "@/api";
 import Item from "./item.vue";
 import { WaterFall, Infinite } from "@/libs";
 import { isMobileTerminal } from "@/utils";
+import { appStore } from "@/store/pinia";
+const store = appStore();
 /**
  * 构建数据请求
  */
-const query = {
+let query = {
   page: 1,
   size: 20
 };
@@ -58,6 +60,31 @@ const getPexelsListData = async () => {
   }
   // 修改loading标识 当前请求完毕
   isLoading.value = false;
+};
+/**
+ * 通过此方法修改 query对象 重新发起请求
+ * @param newQuery
+ */
+const resetQuery = (newQuery: UnRequired<IParams>) => {
+  query = { ...query, ...newQuery };
+  // 重置状态
+  isFinished.value = false;
+  pexelsList.value = [];
+};
+/**
+ * 监听选中项的改变
+ */
+watch(
+  () => store.currentCategory,
+  currentCategory => {
+    resetQuery({
+      page: 1,
+      categoryId: currentCategory.id
+    });
+  }
+);
+type UnRequired<T> = {
+  [key in keyof T]?: T[key];
 };
 </script>
 

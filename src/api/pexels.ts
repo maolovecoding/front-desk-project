@@ -9,10 +9,23 @@ export const getPexelsList = (params: IParams) => {
     params
   });
 };
+/**
+ * 获取搜索提示
+ * @param q 关键字
+ */
+export const getSearchHint = (q: string) => {
+  return request.get<{ total: number; result: string[] }>({
+    url: "/pexels/hint",
+    params: {
+      q
+    }
+  });
+};
 
-interface IParams {
+export interface IParams {
   page: number;
   size: number;
+  categoryId?: string;
 }
 
 export interface IResponse {

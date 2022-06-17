@@ -14,10 +14,10 @@
       </li>
       <li
         v-for="(category, index) in store.categories"
-        @click="handleItemClick(index)"
+        @click="handleItemClick(category)"
         :ref="setItemRefs"
         class="shrink-0 px-1.5 py-0.5 z-10 duration-200 last:mr-4"
-        :class="{ 'text-zinc-100': currCategoryIndex === index }"
+        :class="{ 'text-zinc-100': AppStore.currentCategoryIndex === index }"
         :key="category.id">
         {{ category.name }}
       </li>
@@ -32,10 +32,12 @@
 <script setup lang="ts">
 import { onBeforeUpdate, ref, watch } from "vue";
 import { useScroll } from "@vueuse/core";
-import { categoryStore } from "@/store/pinia";
+import { categoryStore, appStore } from "@/store/pinia";
 import { SvgIcon, Popup } from "@/libs";
 import Menu from "../../menu/index.vue";
+import { ICategory } from "../type";
 const store = categoryStore()
+const AppStore = appStore()
 // 滑块
 const sliderRef = ref();
 // 滑块默认样式
@@ -46,7 +48,7 @@ const sliderStyle = ref({
 // 获取ul
 const ulRef = ref<HTMLUListElement>();
 // 选中的item项的下标
-const currCategoryIndex = ref(0);
+// const currCategoryIndex = ref(0);
 // 获取所有的 item 元素
 const itemRefs: HTMLLIElement[] = [];
 const setItemRefs = (el: any) => {
@@ -54,8 +56,9 @@ const setItemRefs = (el: any) => {
 };
 // 通过 vueuse -》 vueScroll 获取响应式的 scroll 滚动距离 横向滚动偏离位置
 const { x: ulScrollLeft } = useScroll(ulRef);
-const handleItemClick = (index: number) => {
-  currCategoryIndex.value = index;
+const handleItemClick = (category: ICategory) => {
+  // currCategoryIndex.value = index;
+  AppStore.changeCurrentCategory(category)
 };
 // 控制popup蒙版的显示和隐藏
 const isVisible = ref(false);
@@ -68,7 +71,7 @@ onBeforeUpdate(() => {
   itemRefs.length = 0;
 });
 // 在选中的 item发生改变时 更新当前的滑块样式
-watch(currCategoryIndex, newIndex => {
+watch(()=>AppStore.currentCategoryIndex, newIndex => {
   const { left, width } = itemRefs[newIndex].getBoundingClientRect();
   console.log(left, ulRef.value?.scrollLeft);
   sliderStyle.value = {
