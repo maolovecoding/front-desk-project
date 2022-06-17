@@ -83,6 +83,16 @@ watch(
     });
   }
 );
+// 监听 当前搜索文本的变化
+watch(
+  () => store.searchText,
+  newSearchText => {
+    resetQuery({
+      page: 1,
+      searchText: newSearchText
+    });
+  }
+);
 type UnRequired<T> = {
   [key in keyof T]?: T[key];
 };

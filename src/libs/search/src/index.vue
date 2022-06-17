@@ -40,7 +40,7 @@
       <div
         v-if="$slots.dropdown"
         v-show="isFocus"
-        class="w-full px-2 rounded max-h-[368px] overflow-auto text-base bg-white dark:bg-zinc-800 absolute left-0 top-[56px] z-20 border border-zinc-200 dark:border-zinc-600 duration-200 hover:shadow-2xl">
+        class="w-full px-2.5 pt-2 pb-1.5 rounded max-h-[368px] overflow-auto text-base bg-white dark:bg-zinc-800 absolute left-0 top-[56px] z-20 border border-zinc-200 dark:border-zinc-600 duration-200 hover:shadow-2xl">
         <slot name="dropdown" />
       </div>
     </Transition>

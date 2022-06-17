@@ -26,11 +26,15 @@
 
 <script setup lang="ts">
 import { defineEmits } from "vue";
-import { SvgIcon } from "@/libs";
+import { SvgIcon, confirm } from "@/libs";
 import { searchStore } from "@/store/pinia";
 const store = searchStore();
 const handleDeleteAllClick = () => {
-  store.clear();
+  confirm("我是内容 哈哈哈")
+    .then(() => {
+      store.clear();
+    })
+    .catch(() => {});
 };
 const handleDeleteClick = (index: number) => {
   store.deleteHistory(index);
@@ -39,7 +43,6 @@ const emits = defineEmits<{
   (e: "searchClick", text: string): void;
 }>();
 const handleSearchClick = (history: string) => {
-
   emits("searchClick", history);
 };
 </script>

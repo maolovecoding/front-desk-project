@@ -8,11 +8,16 @@ import categoryStore from "./category";
 const app = defineStore("app", {
   state: () => ({
     // 当前选中分类
-    currentCategory: ALL_CATEGORY_ITEM as ICategory
+    currentCategory: ALL_CATEGORY_ITEM as ICategory,
+    // 搜索的文本
+    searchText: ""
   }),
   actions: {
     changeCurrentCategory(newCategory: ICategory) {
       this.currentCategory = newCategory;
+    },
+    changeSearchText(text: string) {
+      this.searchText = text;
     }
   },
   getters: {

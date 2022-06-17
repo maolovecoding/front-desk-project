@@ -22,10 +22,18 @@ export const getSearchHint = (q: string) => {
   });
 };
 
+/**
+ * 获取推荐主题
+ */
+export const getThemes = () => {
+  return request.get<{ themes: ITheme[] }>("/pexels/themes");
+};
+
 export interface IParams {
   page: number;
   size: number;
   categoryId?: string;
+  searchText?: string;
 }
 
 export interface IResponse {
@@ -49,4 +57,10 @@ export interface IPexelsList {
   photoHeight: number;
   photoType: string;
   __v: number;
+}
+
+export interface ITheme {
+  id: string;
+  photo: string;
+  title: string;
 }
