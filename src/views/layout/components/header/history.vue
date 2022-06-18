@@ -30,7 +30,7 @@ import { SvgIcon, confirm } from "@/libs";
 import { searchStore } from "@/store/pinia";
 const store = searchStore();
 const handleDeleteAllClick = () => {
-  confirm("我是内容 哈哈哈")
+  confirm("确定要清空所有搜索记录吗？")
     .then(() => {
       store.clear();
     })

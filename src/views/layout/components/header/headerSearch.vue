@@ -33,4 +33,5 @@ const handleSearchClick = (item: string) => {
     appStore().changeSearchText(item);
   }
 };
+
 </script>

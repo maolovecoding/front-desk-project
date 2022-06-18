@@ -10,12 +10,6 @@ import Confirm from "./index.vue";
 export function confirm(content: string): Promise<unknown>;
 export function confirm(
   title: string,
-  content: string,
-  cancelText: string,
-  confirmText: string
-): Promise<unknown>;
-export function confirm(
-  title: string,
   content?: string,
   cancelText?: string,
   confirmText?: string

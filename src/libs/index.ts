@@ -6,5 +6,6 @@ export { default as Popover, POSITION } from "./popover";
 export { default as WaterFall } from "./waterfall/index.vue";
 export { default as Infinite } from "./infinite/index.vue";
 export * from "./confirm";
+export * from "./message";
 export * from "./waterfall/utils";
 export { SvgIcon };

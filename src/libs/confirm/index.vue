@@ -55,13 +55,13 @@ const {
   closeHandler
 } = defineProps<{
   // 标题
-  title: string;
+  title?: string;
   // 描述
-  content: string;
+  content?: string;
   // 取消按钮文本
-  cancelText: string;
+  cancelText?: string;
   // 确定按钮文本
-  confirmText: string;
+  confirmText?: string;
   // 取消按钮事件
   cancelHandler?: () => void;
   // 确定按钮事件

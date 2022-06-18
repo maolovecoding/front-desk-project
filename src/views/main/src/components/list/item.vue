@@ -8,6 +8,7 @@
       <!-- 图片 -->
       <img
         v-lazy
+        ref="imgRef"
         class="w-full rounded bg-transparent"
         :src="item.photo"
         :style="{
@@ -38,6 +39,7 @@
           :type="TypeEnum.info"
           icon="download"
           :size="SizeEnum['icon-default']"
+          @click="handleDownloadClick"
           icon-class="fill-zinc-900 dark:fill-zinc-200" />
         <!-- 全屏 -->
         <ButtonVue
@@ -45,6 +47,7 @@
           :type="TypeEnum.info"
           icon="full"
           :size="SizeEnum['icon-default']"
+          @click="imgFullscreenClick"
           icon-class="fill-zinc-900 dark:fill-zinc-200" />
       </div>
     </div>
@@ -61,14 +64,24 @@
 </template>
 
 <script setup lang="ts">
-import { defineProps } from "vue";
+import { defineProps, ref } from "vue";
+import { useFullscreen } from "@vueuse/core";
+import { saveAs } from "file-saver";
 import { IPexelsList } from "@/api";
-import { Button as ButtonVue, TypeEnum, SizeEnum } from "@/libs";
+import { Button as ButtonVue, TypeEnum, SizeEnum, message } from "@/libs";
 import { randomColor } from "@/utils";
-defineProps<{
+const { item } = defineProps<{
   item: IPexelsList;
   width?: number;
 }>();
+const handleDownloadClick = () => {
+  message("success", "下载成功");
+  // 使用 file-saver完成小图片下载
+  setTimeout(saveAs, 100, item.photoDownLink); // 延迟下载
+};
+// 生成全屏的方法
+const imgRef = ref();
+const { enter: imgFullscreenClick } = useFullscreen(imgRef);
 </script>
 
 <style scoped></style>
