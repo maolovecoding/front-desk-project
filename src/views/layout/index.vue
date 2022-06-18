@@ -9,7 +9,7 @@
 </template>
 
 <script setup lang="ts">
-import Floating from "./components/floating";
+import Floating from "./components/floating/index.vue";
 import Header from "./components/header";
 import Main from "./components/main/index.vue";
 </script>

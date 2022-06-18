@@ -12,7 +12,7 @@ const Header: FunctionalComponent = () => {
   return (
     <div class="w-full bg-white dark:bg-zinc-800 border-b border-b-zinc-200 dark:border-b-zinc-700 px-2 py-1 duration-500">
       <div class="flex items-center">
-        <img class=" h-4 cursor-pointer mr-2" src={Logo} onClick={onToHome} />
+        <img class="guide-home h-4 cursor-pointer mr-2" src={Logo} onClick={onToHome} />
         <HeaderSearch class="mr-1" />
         <HeaderTheme class="mr-1" />
         <HeaderMy />

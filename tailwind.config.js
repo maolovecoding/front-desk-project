@@ -35,8 +35,15 @@ module.exports = {
         "error-100": "#ED7456",
         "error-200": "#f3471c",
         "error-300": "#ffffff"
+      },
+      // scrollbar插件 支持暗黑模式
+      variants: {
+        scrollbar: ["dark"]
       }
     }
   },
-  plugins: []
+  plugins: [
+    // 清除难看的滚动条
+    require("tailwind-scrollbar")
+  ]
 };

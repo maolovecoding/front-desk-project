@@ -5,7 +5,7 @@
         <SvgIcon
           :name="svgIconName!"
           fillClass="fill-zinc-900 dark:fill-zinc-300"
-          class="w-4 h-4 p-1 cursor-pointer rounded-xl duration-200 outline-none hover:bg-zinc-100/60 dark:hover:bg-zinc-900" />
+          class="guide-theme w-4 h-4 p-1 cursor-pointer rounded-xl duration-200 outline-none hover:bg-zinc-100/60 dark:hover:bg-zinc-900" />
       </template>
       <!-- 弹层内容展示区 -->
       <div class="w-[140px] overflow-hidden">
@@ -29,7 +29,7 @@
 
 <script setup lang="ts">
 import { themeStore } from "@/store/pinia";
-import { Popover, SvgIcon, POSITION } from "@/libs";
+import { Popover, SvgIcon } from "@/libs";
 import { computed } from "vue";
 type getArrType<Arr extends unknown[]> = Arr extends Array<infer T> ? T : never;
 enum THEME {
