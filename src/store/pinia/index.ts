@@ -4,6 +4,7 @@ import categoryStore from "./category";
 import themeStore from "./theme";
 import appStore from "./app";
 import searchStore from "./search";
+import userStore from "./user";
 const store = defineStore("main", {
   state: () => ({}),
   getters: {},
@@ -15,7 +16,7 @@ pinia.use(PiniaPluginPersist);
 
 export default pinia;
 
-export { categoryStore, themeStore, appStore, searchStore };
+export { categoryStore, themeStore, appStore, searchStore, userStore };
 
 export const useStore = (id: "search" | "category" | "app" | "theme") => {
   switch (id) {

@@ -15,3 +15,14 @@ export const validatePassword = (value: string) => {
   // 返回true表示校验通过
   return true;
 };
+
+/**
+ * 确认密码表单校验  关联密码需要注册
+ * 1. 定义方法
+ * 2. 注册这个校验
+ */
+export const validateConfirmPassword = (val: string, password: string[]) => {
+  if(val!==password[0]) return "两次密码输入不一致"
+  console.log(val, password);
+  return true;
+};

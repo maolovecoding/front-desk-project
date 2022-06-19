@@ -21,16 +21,16 @@
           {{ content }}
         </div>
         <!-- 按钮 -->
-        <div class="flex justify-center">
+        <div class="flex justify-around">
           <Button
-            class="mr-2"
+            class="mr-2 w-6"
             @click="handleCancelClick"
             :type="TypeEnum.info"
             :size="SizeEnum.default"
             >{{ cancelText }}</Button
           >
           <Button
-            class="mr-2"
+            class="mr-2 w-6"
             @click="handleConfirmClick"
             :type="TypeEnum.primary"
             :size="SizeEnum.default"

@@ -2,6 +2,11 @@ import { h, render } from "vue";
 import Message from "./index.vue";
 type IMessageType = "success" | "error" | "warn";
 export function message(type: IMessageType, content: string): void;
+export function message(
+  type: IMessageType,
+  content: string,
+  duration: number
+): void;
 /**
  *
  * @param type 类型

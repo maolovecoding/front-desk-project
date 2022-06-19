@@ -115,7 +115,13 @@ class Request {
         // 业务请求错误
         return Promise.reject(new Error(message));
       },
-      error => error
+      error => {
+        // 处理token超时
+        if (error?.response.data?.code === 401) {
+          // /退出登录
+        }
+        return Promise.reject(error);
+      }
     );
   }
 }
