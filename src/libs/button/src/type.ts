@@ -30,7 +30,7 @@ export enum SizeEnum {
 export const sizeEnum = {
   // 文字按钮
   default: {
-    button: "w-8 h-4 text-base",
+    button: "h-4 text-base",
     icon: ""
   },
   // icon

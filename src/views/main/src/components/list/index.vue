@@ -11,20 +11,31 @@
         :column="isMobileTerminal ? 2 : 5"
         :picture-pre-reading="false">
         <template #default="{ item, width }">
-          <Item :item="item" :width="width"></Item>
+          <Item @click="handleToPinsClick" :item="item" :width="width"></Item>
         </template>
       </WaterFall>
     </Infinite>
+
+    <!-- 图片详情 内容展示 -->
+    <transition
+      :css="false"
+      @before-enter="handleBeforeEnter"
+      @enter="handleEnter"
+      @leave="handleLeave">
+      <Pins v-if="isVisiblePins" :id="currentPins.id" />
+    </transition>
   </div>
 </template>
 
 <script setup lang="ts">
 import { ref, watch } from "vue";
+import gsap from "gsap";
 import { getPexelsList, IPexelsList, IParams } from "@/api";
 import Item from "./item.vue";
 import { WaterFall, Infinite } from "@/libs";
 import { isMobileTerminal } from "@/utils";
 import { appStore } from "@/store/pinia";
+import Pins from "@/views/pins/components/pins.vue";
 const store = appStore();
 /**
  * 构建数据请求
@@ -71,6 +82,53 @@ const resetQuery = (newQuery: UnRequired<IParams>) => {
   isFinished.value = false;
   pexelsList.value = [];
 };
+
+const handleToPinsClick = (data: any) => {
+  history.pushState(null, "", `/pins/${data.id}`);
+  isVisiblePins.value = true;
+  currentPins.value = data;
+  console.log(data);
+};
+// 控制pins的展示
+const isVisiblePins = ref(false);
+// 当前选中的item项的所需数据
+const currentPins = ref<any>();
+const handleBeforeEnter = (el: HTMLDivElement) => {
+  gsap.set(el, {
+    scaleX: 0,
+    scaleY: 0,
+    transformOrigin: "0 0",
+    translateX: currentPins.value.location?.translateX,
+    translateY: currentPins.value.location?.translateY,
+    opacity: 0
+  });
+};
+const handleEnter = (el: HTMLDivElement, done: () => void) => {
+  gsap.to(el, {
+    scaleX: 1,
+    scaleY: 1,
+    opacity: 1,
+    duration: 0.4,
+    translateX: 0,
+    translateY: 0,
+    // 完成的回调
+    onComplete: done
+  });
+};
+const handleLeave = (el: HTMLDivElement, done: () => void) => {
+    gsap.to(el, {
+    scaleX: 0,
+    scaleY: 0,
+    opacity: 0,
+    duration: 0.4,
+    translateX: currentPins.value.location?.translateX,
+    translateY: currentPins.value.location?.translateY,
+    onComplete: done
+  });
+};
+window.addEventListener("popstate",()=>{
+  isVisiblePins.value = false
+})
 /**
  * 监听选中项的改变
  */

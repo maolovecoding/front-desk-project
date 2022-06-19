@@ -36,6 +36,9 @@ module.exports = {
         "error-200": "#f3471c",
         "error-300": "#ffffff"
       },
+      backdropBlur:{
+        "4xl":"240px"
+      },
       // scrollbar插件 支持暗黑模式
       variants: {
         scrollbar: ["dark"]

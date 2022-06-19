@@ -4,7 +4,8 @@
       class="relative w-full rounded cursor-zoom-in group"
       :style="{
         backgroundColor: randomColor()
-      }">
+      }"
+      @click="handleToPinsClick">
       <!-- 图片 -->
       <img
         v-lazy
@@ -64,8 +65,8 @@
 </template>
 
 <script setup lang="ts">
-import { defineProps, ref } from "vue";
-import { useFullscreen } from "@vueuse/core";
+import { defineProps, ref, defineEmits, computed } from "vue";
+import { useFullscreen, useElementBounding } from "@vueuse/core";
 import { saveAs } from "file-saver";
 import { IPexelsList } from "@/api";
 import { Button as ButtonVue, TypeEnum, SizeEnum, message } from "@/libs";
@@ -82,6 +83,35 @@ const handleDownloadClick = () => {
 // 生成全屏的方法
 const imgRef = ref();
 const { enter: imgFullscreenClick } = useFullscreen(imgRef);
+
+const emits = defineEmits<{
+  (e: "click", data: { id: string; location: any }): void;
+}>();
+// 获取响应式的图片的宽高等
+const {
+  x: imgContainerX,
+  y: imgContainerY,
+  width: imgContainerWidth,
+  height: imgContainerHeight
+} = useElementBounding(imgRef);
+// pins跳转记录 记录图片的中心点 x | y 位置 + 宽 | 高 一半
+const imgContainerCenter = computed(() => {
+  return {
+    translateX: parseInt(
+      imgContainerX.value + imgContainerWidth.value / 2 + ""
+    ),
+    translateY: parseInt(
+      imgContainerY.value + imgContainerHeight.value / 2 + ""
+    )
+  };
+});
+// 图片跳转 进入图片详情页
+const handleToPinsClick = () => {
+  emits("click", {
+    id: item.id,
+    location: imgContainerCenter.value
+  });
+};
 </script>
 
 <style scoped></style>

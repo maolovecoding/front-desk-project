@@ -29,6 +29,9 @@ export const getThemes = () => {
   return request.get<{ themes: ITheme[] }>("/pexels/themes");
 };
 
+export const getImageById = (id: string) => {
+  return request.get<IImage>(`/pexels/${id}`);
+};
 export interface IParams {
   page: number;
   size: number;
@@ -63,4 +66,22 @@ export interface ITheme {
   id: string;
   photo: string;
   title: string;
+}
+
+
+export interface IImage {
+  tags: string[];
+  _id: string;
+  photoLink: string;
+  photo: string;
+  authorLike: string;
+  avatar: string;
+  author: string;
+  photoDownLink: string;
+  id: string;
+  title: string;
+  photoWidth: number;
+  photoHeight: number;
+  photoType: string;
+  __v: number;
 }
