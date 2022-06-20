@@ -38,7 +38,7 @@ export interface IButtonProps {
   isLoading?: boolean;
 }
 const emits = defineEmits<{
-  (e: "click", event: PointerEvent): void;
+  (e: "click", event: PointerEvent): any;
 }>();
 const {
   icon,

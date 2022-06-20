@@ -6,6 +6,7 @@ import pinia from "@/store/pinia";
 // import { vuexStore } from "@/store";
 import { useREM, initTheme } from "@/utils";
 import directives from "@/directives";
+import "./premission";
 useREM();
 // 注册svg-icons 虚拟地址 是插件 vite-plugin-svg-icons 生成的虚拟地址
 import "virtual:svg-icons-register";

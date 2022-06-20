@@ -47,6 +47,13 @@ export const updateProfile = (data: IUserProfile) => {
     data
   });
 };
+/**
+ * 获取 oss 阿里云的 上传凭证
+ * @returns
+ */
+export const getSts = () => {
+  return request.get<IOSSToken>("/user/sts");
+};
 
 export interface ILoginParams {
   username: string;
@@ -93,4 +100,24 @@ export interface IUserProfile {
   _id: string;
   username: string;
   __v: number;
+}
+
+export interface AssumedRoleUser {
+  Arn: string;
+  AssumedRoleId: string;
+}
+
+export interface Credentials {
+  SecurityToken: string;
+  AccessKeyId: string;
+  AccessKeySecret: string;
+  Expiration: Date;
+}
+/**
+ * 阿里云上传凭证返回数据类型
+ */
+export interface IOSSToken {
+  RequestId: string;
+  AssumedRoleUser: AssumedRoleUser;
+  Credentials: Credentials;
 }

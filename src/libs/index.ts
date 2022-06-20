@@ -9,4 +9,5 @@ export * from "./confirm";
 export * from "./message";
 export * from "./waterfall/utils";
 export { default as Input } from "./input/index.vue";
+export { default as Dialog } from "./dialog/index.vue";
 export { SvgIcon };

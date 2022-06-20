@@ -54,41 +54,28 @@
             type="text"
             class="w-full"
             :max="20"
-            :modelValue="store.userInfo.nickname"
-            @update:model-value="handleChangeUserInfo('nickname', $event)" />
+            v-model="userInfo.nickname" />
         </div>
         <!-- 职位 -->
         <div class="py-1 xl:flex xl:items-center xl:my-1">
           <span class="w-8 block mb-1 font-bold dark:text-zinc-300 xl:mb-0"
             >职位</span
           >
-          <Input
-            type="text"
-            class="w-full"
-            :modelValue="store.userInfo.title"
-            @update:model-value="handleChangeUserInfo('title', $event)" />
+          <Input type="text" class="w-full" v-model="userInfo.title" />
         </div>
         <!-- 公司 -->
         <div class="py-1 xl:flex xl:items-center xl:my-1">
           <span class="w-8 block mb-1 font-bold dark:text-zinc-300 xl:mb-0"
             >公司</span
           >
-          <Input
-            type="text"
-            class="w-full"
-            :modelValue="store.userInfo.company"
-            @update:model-value="handleChangeUserInfo('company', $event)" />
+          <Input type="text" class="w-full" v-model="userInfo.company" />
         </div>
         <!-- 个人主页 -->
         <div class="py-1 xl:flex xl:items-center xl:my-1">
           <span class="w-8 block mb-1 font-bold dark:text-zinc-300 xl:mb-0"
             >个人主页</span
           >
-          <Input
-            type="text"
-            class="w-full"
-            :modelValue="store.userInfo.homePage"
-            @update:model-value="handleChangeUserInfo('homePage', $event)" />
+          <Input type="text" class="w-full" v-model="userInfo.homePage" />
         </div>
         <!-- 个人介绍 -->
         <div class="py-1 xl:flex xl:items-center xl:my-1">
@@ -122,11 +109,28 @@
         >
       </div>
     </div>
+    <!-- PC -->
+    <Dialog v-if="!isMobileTerminal" title="裁减头像" v-model="isDialogVisible">
+      <ChangeAvatar
+        @close="handleCloseClick"
+        :blob="currentBlob"></ChangeAvatar>
+    </Dialog>
+    <!-- mobile -->
+    <Popup
+      v-model="isDialogVisible"
+      v-else
+      :class="{
+        'h-screen': isDialogVisible
+      }">
+      <ChangeAvatar
+        @close="handleCloseClick"
+        :blob="currentBlob"></ChangeAvatar>
+    </Popup>
   </div>
 </template>
 
 <script setup lang="ts">
-import { ref } from "vue";
+import { ref, watch } from "vue";
 import {
   SvgIcon,
   Input,
@@ -137,10 +141,12 @@ import {
   message
 } from "@/libs";
 import Navbar from "@/libs/navbar/index.vue";
+import { Dialog, Popup } from "@/libs";
 import { isMobileTerminal } from "@/utils";
 import { useRouter } from "vue-router";
 import { userStore } from "@/store/pinia";
-import { IUserProfile, updateProfile } from "@/api";
+import { updateProfile } from "@/api";
+import ChangeAvatar from "./components/changeAvatar.vue";
 const router = useRouter();
 const store = userStore();
 /**
@@ -149,15 +155,31 @@ const store = userStore();
 const handleNavbarLeftClick = () => {
   router.back();
 };
-const handleSelectImgChange = () => {};
-
-const userInfo = store.userInfo;
-const handleChangeUserInfo = (key: keyof IUserProfile, value: string) => {
-  store.setUserInfo({
-    ...store.userInfo,
-    [key]: value
-  });
+const isDialogVisible = ref(false);
+// 选中的图片
+const currentBlob = ref("");
+/**
+ * 选中文件后触发的事件
+ * 当两次选中文件是相同文件时  change回调不会被再次触发
+ * 想要解决这问题，只需要在每次选中的图片不在使用的时候，清空掉 ref的内容（图片记录）即可
+ */
+const handleSelectImgChange = () => {
+  const imgFile = inputFileRef.value?.files?.[0];
+  if (imgFile) {
+    // 生成blob对象
+    const blobImg = URL.createObjectURL(imgFile);
+    // 拿到 类文件对象 blob
+    currentBlob.value = blobImg;
+    // 展示dialog
+    isDialogVisible.value = true;
+    console.log(blobImg);
+  }
 };
+const handleCloseClick = () => {
+  isDialogVisible.value = false;
+};
+
+const userInfo = ref({ ...store.userInfo });
 const loading = ref(false);
 /**
  * 确认修改个人信息
@@ -165,8 +187,10 @@ const loading = ref(false);
 const handleChangeProfileClick = async () => {
   loading.value = true;
   try {
-    await updateProfile(store.userInfo);
+    await updateProfile(userInfo.value);
     message("success", "用户信息修改成功！");
+    // /同步更新pinia
+    store.setUserInfo(userInfo.value);
   } catch (error) {
     message("error", "用户信息修改失败！");
   } finally {
@@ -192,6 +216,15 @@ const handleAvatarClick = () => {
   // 触发选择文件
   inputFileRef.value?.click();
 };
+
+/**
+ * 清空选中的图片记录
+ */
+watch(isDialogVisible, val => {
+  if (!val) {
+    inputFileRef.value!.value = "";
+  }
+});
 </script>
 
 <style scoped></style>
