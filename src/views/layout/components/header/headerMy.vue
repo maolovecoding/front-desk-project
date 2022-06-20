@@ -91,7 +91,9 @@ const handleItemClick = (item: getMenuType<typeof menuArr>) => {
     confirm("您确定要退出登录吗？").then(() => {
       store.logout();
     });
+    return
   }
+  router.push(item.path)
 };
 type getMenuType<T> = T extends Array<infer V> ? V : never;
 </script>

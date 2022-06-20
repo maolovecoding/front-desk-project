@@ -76,6 +76,9 @@ class Request {
   patch<T>(config: RequestConfig<T>) {
     return this.request<T>({ ...config, method: "PATCH" });
   }
+  put<T>(config: RequestConfig<T>) {
+    return this.request<T>({ ...config, method: "PUT" });
+  }
 
   /**
    *

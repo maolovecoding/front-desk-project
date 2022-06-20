@@ -8,4 +8,5 @@ export { default as Infinite } from "./infinite/index.vue";
 export * from "./confirm";
 export * from "./message";
 export * from "./waterfall/utils";
+export { default as Input } from "./input/index.vue";
 export { SvgIcon };

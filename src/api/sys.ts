@@ -12,22 +12,40 @@ export const getCaptcha = (data: any) => {
 };
 /**
  * 登录
-*/
+ */
 export const login = (data: ILoginParams) => {
   return request.post<{ token: string }>({
     url: "/sys/login",
     data
   });
 };
-
+/**
+ * 注册
+ * @param data
+ * @returns
+ */
 export const register = (data: IRegisterParams) => {
   return request.post<any>({
     url: "/sys/register",
     data
   });
 };
+/**
+ * 获取用户信息
+ * @returns
+ */
 export const getProfile = () => {
   return request.get<IUserProfile>("/user/profile");
+};
+/**
+ * 更新用户信息
+ * @returns
+ */
+export const updateProfile = (data: IUserProfile) => {
+  return request.put({
+    url: "/user/profile",
+    data
+  });
 };
 
 export interface ILoginParams {

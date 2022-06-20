@@ -57,6 +57,10 @@ const user = defineStore("user", {
       this.userInfo = {} as IUserProfile;
       // 刷新页面
       location.reload();
+    },
+    // 修改 userInfo的值
+    setUserInfo(newUserInfo: IUserProfile) {
+      this.userInfo = newUserInfo;
     }
   },
   persist: {

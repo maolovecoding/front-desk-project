@@ -20,5 +20,14 @@ export default [
     path: "/register",
     name: "register",
     component: () => import("@/views/login-register/register/index.vue")
+  },
+  {
+    path: "/profile",
+    name: "profile",
+    component: () => import("@/views/profile/index.vue"),
+    meta: {
+      // 标记当前的页面只有用户登录后才能进入
+      user: true
+    }
   }
 ] as RouteRecordRaw[];

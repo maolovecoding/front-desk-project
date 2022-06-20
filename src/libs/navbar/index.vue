@@ -37,8 +37,8 @@ const {
   clickLeft,
   clickRight
 } = defineProps<{
-  clickLeft?: () => {};
-  clickRight?: () => {};
+  clickLeft?: () => any;
+  clickRight?: () => any;
   // 是否吸顶
   sticky?: boolean;
 }>();
