@@ -15,6 +15,15 @@ export default [
           // 标记当前的页面只有用户登录后才能进入
           user: true
         }
+      },
+      {
+        path: "/member",
+        name: "member",
+        component: () => import("@/views/member/index.vue"),
+        meta: {
+          // 标记当前的页面只有用户登录后才能进入
+          user: true
+        }
       }
     ]
   },

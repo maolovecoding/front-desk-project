@@ -13,4 +13,5 @@ export { default as Dialog } from "./dialog/index.vue";
 export { default as TriggerMenu } from "./trigger-menu/index.vue";
 export { default as TriggerMenuItem } from "./trigger-menu-item/index.vue";
 export { default as TransitionRouterView } from "./transition-router-view/index.vue";
+export { default as CountDown } from "./count-down/index.vue";
 export { SvgIcon };

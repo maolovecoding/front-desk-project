@@ -46,7 +46,11 @@ import { useRouter } from "vue-router";
 import { useScroll } from "@vueuse/core";
 const store = userStore();
 const router = useRouter();
-const handleVIPClick = () => {};
+const handleVIPClick = () => {
+  // /移动端下跳转的类型
+  appStore().routerType = "push";
+  router.push("/member");
+};
 const handleMyClick = () => {
   // /移动端下跳转的类型
   appStore().routerType = "push";
