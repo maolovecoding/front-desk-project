@@ -59,7 +59,7 @@ import {
   TypeEnum,
   confirm
 } from "@/libs";
-import { userStore } from "@/store/pinia";
+import { userStore, appStore } from "@/store/pinia";
 const store = userStore();
 const menuArr = [
   {
@@ -83,6 +83,8 @@ const menuArr = [
 ];
 const router = useRouter();
 const handleToLoginClick = () => {
+  // /移动端下跳转的类型
+  appStore().routerType = "push";
   router.push("/login");
 };
 const handleItemClick = (item: getMenuType<typeof menuArr>) => {
@@ -91,9 +93,11 @@ const handleItemClick = (item: getMenuType<typeof menuArr>) => {
     confirm("您确定要退出登录吗？").then(() => {
       store.logout();
     });
-    return
+    return;
   }
-  router.push(item.path)
+  // /移动端下跳转的类型
+  appStore().routerType = "push";
+  router.push(item.path);
 };
 type getMenuType<T> = T extends Array<infer V> ? V : never;
 </script>

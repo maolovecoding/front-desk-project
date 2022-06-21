@@ -35,7 +35,8 @@
           class="text-sm text-red-600 block mt-0.5 text-left" />
         <!-- 跳转按钮 -->
         <div class="pt-1 pb-3 leading-[0px] text-right">
-          <a @click="handleToRegister"
+          <a
+            @click="handleToRegister"
             class="inline-block p-1 text-zinc-400 text-right dark:text-zinc-600 hover:text-zinc-600 dark:hover:text-zinc-400 text-sm duration-300 cursor-pointer"
             >去注册</a
           >
@@ -74,7 +75,7 @@ import { Button, SvgIcon } from "@/libs";
 import Header from "../components/header.vue";
 import SliderCaptcha from "./slider-captcha.vue";
 import { validateUsername, validatePassword } from "../validate";
-import { userStore } from "@/store/pinia";
+import { userStore, appStore } from "@/store/pinia";
 import { useRouter } from "vue-router";
 const router = useRouter();
 const store = userStore();
@@ -106,16 +107,18 @@ const loginHandler = async () => {
       loginType: "username",
       ...loginForm.value
     });
-  router.push("/");
+    router.push("/");
   } catch (error) {
     // 登录失败
   } finally {
     loading.value = false;
   }
 };
-const handleToRegister = ()=>{
-  router.push("/register")
-}
+const handleToRegister = () => {
+  // /移动端下跳转的类型
+  appStore().routerType = "push";
+  router.push("/register");
+};
 </script>
 
 <style scoped></style>

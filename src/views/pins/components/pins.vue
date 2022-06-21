@@ -20,7 +20,9 @@
       @click="handlePopClick" />
 
     <!-- 内容 -->
-    <div v-if="pexelsImage" class="xl:w-[80%] xl:h-full xl:mx-auto xl:rounded-lg xl:flex">
+    <div
+      v-if="pexelsImage"
+      class="xl:w-[80%] xl:h-full xl:mx-auto xl:rounded-lg xl:flex">
       <img
         class="w-screen mb-2 xl:w-3/5 xl:h-full xl:rounded-tl-lg xl:rounded-bl-lg"
         :src="pexelsImage.photo" />
@@ -65,6 +67,7 @@ import { useRouter } from "vue-router";
 import { getImageById, IImage } from "@/api";
 import { isMobileTerminal } from "@/utils";
 import NavBar from "@/libs/navbar/index.vue";
+import { appStore } from "@/store/pinia";
 import { SvgIcon, Button, TypeEnum, SizeEnum } from "@/libs";
 const { id } = defineProps<{
   id: string;
@@ -78,6 +81,8 @@ const getImageData = async () => {
 getImageData();
 // 后退按钮
 const handlePopClick = () => {
+  // 移动端动画处理 路由跳转类型
+  appStore().routerType = "back";
   router.back();
 };
 </script>

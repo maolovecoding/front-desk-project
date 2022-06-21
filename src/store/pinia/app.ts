@@ -1,3 +1,4 @@
+import { isMobileTerminal } from "@/utils";
 import { ICategory } from "./../../views/main/src/components/navigation/type";
 import { ALL_CATEGORY_ITEM } from "@/constants";
 import { defineStore } from "pinia";
@@ -10,7 +11,9 @@ const app = defineStore("app", {
     // 当前选中分类
     currentCategory: ALL_CATEGORY_ITEM as ICategory,
     // 搜索的文本
-    searchText: ""
+    searchText: "",
+    // 路由跳转类型
+    routerType: "none" as "none" | "push" | "back"
   }),
   actions: {
     changeCurrentCategory(newCategory: ICategory) {
@@ -25,6 +28,10 @@ const app = defineStore("app", {
       return categoryStore().categories.findIndex(
         item => item.id === this.currentCategory.id
       );
+    },
+    routerTypeGetter(): "none" | "push" | "back" {
+      if (!isMobileTerminal.value) return "none";
+      return this.routerType;
     }
   }
 });

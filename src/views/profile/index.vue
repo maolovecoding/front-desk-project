@@ -144,7 +144,7 @@ import Navbar from "@/libs/navbar/index.vue";
 import { Dialog, Popup } from "@/libs";
 import { isMobileTerminal } from "@/utils";
 import { useRouter } from "vue-router";
-import { userStore } from "@/store/pinia";
+import { userStore, appStore } from "@/store/pinia";
 import { updateProfile } from "@/api";
 import ChangeAvatar from "./components/changeAvatar.vue";
 const router = useRouter();
@@ -153,6 +153,8 @@ const store = userStore();
  * 后退
  */
 const handleNavbarLeftClick = () => {
+  // 移动端动画处理 路由跳转类型
+  appStore().routerType = "back";
   router.back();
 };
 const isDialogVisible = ref(false);
